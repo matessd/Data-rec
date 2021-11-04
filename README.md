@@ -41,20 +41,14 @@ Output is stored in tid-all.out
 Format:
 
 1. one line "**tid-xxx**" (xxx is system_tid)
-2. mutiple lines of traced branch **bytecode id** and **if_taken** flag
-3. (only record **POP_JUMP_IF_FALSE**, **POP_JUMP_IF_TRUE**, **JUMP_IF_TRUE_OR_POP**, **JUMP_IF_FALSE_OR_POP**, **FOR_ITER**)
+2. mutiple lines of traced byte codes(branch, CALL and RET)
+   1. branch bytecode has **id** and **if_taken** flag
+   2. CALL and RET only have bytecode **id** (83 is RET, other is CALL)
 
-Example: (114 means POP_JUMP_IF_FALSE)
+Traced Field:
 
-```
-tid-xxx
-114 0 <-- sequence of branch bytecode id and if_taken, can be empty
-114 1
-...
-tid-xxx
-...
-```
+1. Now it will also trace sub-calls of traced method.
 
 ## Baseline
 
-Stores in baseline.out, **no if_taken flag**, divided by **pvm_tid**
+Stores in baseline.out, same format with hardware-traced output.
